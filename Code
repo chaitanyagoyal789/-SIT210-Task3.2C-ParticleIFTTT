@@ -1,0 +1,26 @@
+int photoResistor = A0;
+int photo = A5;
+int threshold = 1;
+
+void setup() 
+{
+    pinMode(photo, INPUT );
+    pinMode(photoResistor, OUTPUT);
+}
+
+void loop() 
+{
+    int light = analogRead(photoResistor);
+    
+    if(light <= threshold)
+    {
+        Particle.publish("SunLight_is_Present","Sun_is_Up", PRIVATE);
+        delay(1000);
+    }
+    
+    else
+    {
+        Particle.publish("SunLight_is_not_there","Sun_is_Down", PRIVATE);
+        delay(1000);
+    }
+}
